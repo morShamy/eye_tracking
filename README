@@ -1,0 +1,65 @@
+Program Work Flow:
+	The program contains a main function.
+	When running the main function, the user is asked to choose a graph to display, out of 8 valid options, or to exit the program.
+	Then, the user is asked to choose an output form: print to screen, or save in a directory  (see explanation about "graphs" folder below).  
+	After choosing valid options, the output graph will be printed or saved in a folder, and then the user will be asked to choose again.
+	This loop will continue until the user chooses to exit the program. 
+	The program uses the raw data excepted from the eye-tracker, as well as data that was manually created (see explanation about "data" folder below),
+	
+	By default, the program produces the specific graph chosen by the user, with the data of all subjects (1-17), and all eight text types. 
+	If you wish to change that - you can edit the "SUBJECTS_NUMBER" and "TESTS_TYPES" tables appear at the top of the python file, under #user control. 
+	The same applies to the threshold being used in the success graph, which is by default 0.5 and can be modified.
+	
+Attached Files:
+	1. "data" folder, contains the following files:
+		a. "gaze_fixation_by_subject" folder, contains the raw data accepted from the eye tracker device. 
+			For each subject, the folder contains two files, one for all gazes, and one for all fixations.
+			In each file, you will find the following columns (when only columns i, ii, iv and vii where used):
+				i.MEDIA_NAME - name of the test (i.e 10pt1.2sp)
+				ii. TIME - fixation \ gaze time apperance, when the time resets at the beginning of each test. 
+				iii. FPOGX - fixation \ gaze horizontal l ocation, from 0 (left) to 1 (right).
+				iv. FPOGY - fixation \ gaze vertical location, from 0 (top) to 1 (bottom).
+				v. FPOGS - fixation time apperance - In both gazes and fixations files, All gazes belong to same fixation will reacive same value.   
+				vi. FPOGD - fixation \ gaze duration. 
+				vii. FPOGV - is current fixation \ gaze valid, 1 for valid, 0 else.
+				viii. AOI - the AOI frame the eye tacker attribute to the specific gaze \ fixation, according to frames assigned manually. 
+		
+		b. "coordinates.csv" file - contains the coordinates of each row, in each text:
+				i. test_type - current test (i.e 10pt1.2sp) 
+				ii. row_index - name of the current row in the text (i.e row2)
+				iii. X - x coordinate start, meaning the far left location.
+				iv. Y - y coordinate start, meaning the top location.
+				v.  width -  width of current row, when X + width, is the horizontal location of the row. 
+				vi. height - height of current row, when Y + height, is the vertical location of the row. 
+		
+		c. "summarized_data.csv" file - contains summarized data, written manually by the experimenter:
+				i. subject_number - subject number id (from 1 to 17)
+				ii. ignore_sample - rather to ignore this sample or not, 1 for ignore, 0 else. 
+				iii. test_type - current test (i.e 10pt1.2sp) 
+				iv. find row by - the way the target row was reffered in the question (bold \ indented \ number)
+				v. question type - type of the question (exist \ count) 
+				vi. target_row_up, target_row_down - top and bottom y coordinate of the target row respectively.
+				vii.question_row_up, question_row_down - top and bottom y coordinate of the question row respectively.
+				vii. focus_start, focus_end - estimated time when the subject was focused on the target row, after reading the question.
+				viii. question_start -  estimated time when the subject started to read the question. 
+				ix. text_order - order of apperance of the specific text to the specific subject (1-8).
+				x.  num of row counting - estimated number of times the subjects counted the rows, before reaching the target line. 
+
+	2. "graphs" folder, contains all results of the data analysis: 
+		a. scatter_with_bias_correction - plots of Gazes and fixations distribution for each subject, with and without bias correction.
+		b. scatter_no_bias_correction - plots of Gazes and fixations distribution for each subject, without bias correction.
+		c. scatter_only_bias_correction - plots of Gazes and fixations distribution for each subject, with only bias correction.
+		d. cdf - plots of Gazes and fixations CDF per subject per test. 
+		e. time_until_question - plot of time until reaching question, by text order, for all subjects. 
+		f. success_summary:
+			i. successful_fixations_ratio_per_test.png - percentage of successful fixations, out of total fixations during all focus times for each test. 
+			ii.successful_subjects_ratio_with_threshold - percentage of successful sbujects in each test, where subject is successful in a test,
+			if his successful fixations ratio is bigger then threshold.
+		g. combine_cdf:
+			i.  for each subject - a combined cdf for all his tests, after normalization.
+			ii. summarized cdf across all subjects, by test type. 
+		h. jump_to_question_sequences - csv contains avrage number of times subjects jumped back to the question during focus time, 
+			by the question type (exist \ count). 
+		i. counting_sequences - bar plot of average number of counting until target line, by way of finding row. 
+
+
