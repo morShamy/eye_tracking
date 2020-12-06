@@ -2,7 +2,7 @@ Program Work Flow:
 	The program contains a main function.
 	When running the main function, the user is asked to choose a graph to display, out of 8 valid options, or to exit the program.
 	Then, the user is asked to choose an output form: print to screen, or save in a directory  (see explanation about "graphs" folder below).  
-	After choosing valid options, the output graph will be printed or saved in a folder, and then the user will be asked to choose again.
+	After choosing valid option, the output graph will be printed or saved in a folder, and then the user will be asked to choose again.
 	This loop will continue until the user chooses to exit the program. 
 	The program uses the raw data excepted from the eye-tracker, as well as data that was manually created (see explanation about "data" folder below),
 	
